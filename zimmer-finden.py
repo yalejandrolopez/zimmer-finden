@@ -1,30 +1,26 @@
 import requests
 from bs4 import BeautifulSoup
+import argparse
 
+"""
+First Experiment with WG-Gesucht website
+
+Missing : other related websites
+"""
+
+# wg-gesucht websites (WG Query)
 url = "https://www.wg-gesucht.de/wg-zimmer-in-Munster.91.0.1.0.html"
-#url = "https://www.wg-gesucht.de/wg-zimmer-in-Munster-Mauritz.9003582.html"
 
 response = requests.get(url)
 soup = BeautifulSoup(response.content, "lxml")
-tags = soup.find_all('h3') 
 
-ls = []
-
-for announce in tags:
-
-    for i in range(len(announce)):
-
-        ls.append(announce.text)
-
-
+# main cards for iteration
 announce_card = soup.find_all('div', class_= 'col-sm-8 card_body')
-
 span_card = soup.find_all('div', class_= 'col-xs-11')
-
-#print(span_card)
 
 link = []
 price = []
+info = []
 
 for announce in announce_card:
 
@@ -36,8 +32,6 @@ for announce in announce_card:
 
     price.append(announce_price)
 
-info = []
-
 for subannounce in span_card:
 
     #print(subannounce)
@@ -46,7 +40,21 @@ for subannounce in span_card:
 
     info.append(announce_info)
 
-print(len(link) == len(price) ==len(info))
+# clear announcement
+if len(link) == len(price) ==len(info) == False :
+
+    link = link[1: ]
+    info = info[1: ]
+
+    print('Announcement removed')
 
 
+
+# option : query for weiblich | mannlich
+# query for 'ein Zimmer Wohnung' #
+# process more pages  - one page enough ?#
+# remove old posts
+# option : moving day
+# geocode
+# prelimanry plot before leaflet (or other)
 
