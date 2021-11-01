@@ -19,6 +19,7 @@ import requests
 import argparse
 import pandas as pd
 import datetime
+import folium
 import time as tp
 from bs4 import BeautifulSoup
 from geopy.extra.rate_limiter import RateLimiter
@@ -30,7 +31,7 @@ pm_argparse = argparse.ArgumentParser()
 # argument and parameter directive #
 pm_argparse.add_argument( '--date' , type=str  , help='date of desired move in DD.MM.YEAR format' )
 pm_argparse.add_argument( '--price',  type=int , help='maximum price')
-pm_argparse.add_argument( '--poi', type=int, help='location of point of interest')
+pm_argparse.add_argument( '--output', type=str, help='path to output html directory')
 
 # read argument and parameters #
 pm_args = pm_argparse.parse_args()
@@ -183,10 +184,24 @@ address  = list(map(','.join, zip(street, number, neigh, city, country)))
 df_p12['address'] = address
 df_p12['location'] = df_p12['address'].apply(geocode)
 df_p12['point'] = df_p12['location'].apply(lambda loc: tuple(loc.point) if loc else None)
+df_p12 = df_p12.dropna(subset = ['point'])
 df_p12[['latitude', 'longitude', 'altitude']] = pd.DataFrame(df_p12['point'].tolist(), index=df_p12.index)
 
-
 # distance to point option
+locations = df_p12[['latitude', 'longitude']]
+locationlist = locations.values.tolist()
+links = list(df_p12['link'])
+print(links)
+
+map = folium.Map(location = [51.95371107628213, 7.628077552663438], zoom_start = 13)
+#for point in range(len(locationlist)):
+ #   folium.Marker(locationlist[point]).add_to(map)
+
+for point in range(0, len(locationlist)):
+    folium.Marker(locationlist[point], popup=links[point]).add_to(map)
+
+out_path = pm_args.output + 'wohn.html'
+map.save(out_path)
 
 #make plot of points
 # query for clicked point
