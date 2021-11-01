@@ -17,21 +17,24 @@ Missing : other related websites
 # import required libraries
 import requests
 import argparse
-import pandas as pd
 import datetime
 import folium
+import pyproj
+import pandas as pd
 import time as tp
 from bs4 import BeautifulSoup
 from geopy.extra.rate_limiter import RateLimiter
 from geopy.geocoders import Nominatim
+from scipy.spatial.distance import cdist
 
 # argument parser
 pm_argparse = argparse.ArgumentParser()
 
 # argument and parameter directive #
-pm_argparse.add_argument( '--date' , type=str  , help='date of desired move in DD.MM.YEAR format' )
-pm_argparse.add_argument( '--price',  type=int , help='maximum price')
-pm_argparse.add_argument( '--output', type=str, help='path to output html directory')
+pm_argparse.add_argument( '--date' ,  type=str  , help = 'date of desired move in DD.MM.YEAR format' )
+pm_argparse.add_argument( '--price',  type=int ,  help = 'maximum price')
+pm_argparse.add_argument( '--output', type=str,   help = 'path to output html directory')
+pm_argparse.add_argument( '--poi',    type=str,   help = 'Address of Point of Interest in the format : Street, number. Use brackets! ')
 
 # read argument and parameters #
 pm_args = pm_argparse.parse_args()
@@ -137,7 +140,7 @@ if pm_args.price is not None:
 
 # geocoding
 
-print(" geocoding...")
+print(" \n geocoding... \n ")
 locator = Nominatim(user_agent="myGeocoder")
 geocode = RateLimiter(locator.geocode, min_delay_seconds=1)
 
@@ -187,27 +190,56 @@ df_p12['point'] = df_p12['location'].apply(lambda loc: tuple(loc.point) if loc e
 df_p12 = df_p12.dropna(subset = ['point'])
 df_p12[['latitude', 'longitude', 'altitude']] = pd.DataFrame(df_p12['point'].tolist(), index=df_p12.index)
 
-# distance to point option
+# folium interactive map
 locations = df_p12[['latitude', 'longitude']]
 locationlist = locations.values.tolist()
 links = list(df_p12['link'])
-print(links)
+prices = list(df_p12['price'])
 
+# distance to point option
+if pm_args.poi is not None:
+
+    print('\n modelling surface of optimal location ... \n ')
+
+    address = pm_args.poi + ', Münster, ' + 'Germany'
+    df_poi = pd.DataFrame({'address' : [address]})
+    df_poi['location'] = df_poi['address'].apply(geocode)
+    df_poi['point'] = df_poi['location'].apply(lambda loc: tuple(loc.point) if loc else None)
+
+    if df_poi['point'] is None:
+
+        print('Address invalid or not found')
+
+    df_poi[['latitude', 'longitude', 'altitude']] = pd.DataFrame(df_poi['point'].tolist(), index=df_poi.index)
+    latlong = [df_poi.latitude, df_poi.longitude]
+
+    wgs84 = pyproj.Proj(projparams = 'epsg:4326')
+    utm = pyproj.Proj(projparams = 'epsg:32632')
+
+    lon, lat = pyproj.transform(wgs84, utm, df_p12.latitude, df_p12.longitude)
+    lon_poi, lat_poi = pyproj.transform(wgs84, utm, df_poi.latitude, df_poi.longitude)
+
+
+    df_p12['lon'] = lon
+    df_p12['lat'] = lat
+    df_poi['lat'] = lat_poi
+    df_poi['lon'] = lon_poi
+
+    # calculate distance
+    m = cdist(df_p12[['lon', 'lat']], df_poi[['lon', 'lat']], 'euclidean')
+    df_p12['dist'] = m
+
+    #interpolate distance
+
+### make this popup look better ###
 map = folium.Map(location = [51.95371107628213, 7.628077552663438], zoom_start = 13)
-#for point in range(len(locationlist)):
- #   folium.Marker(locationlist[point]).add_to(map)
-
 for point in range(0, len(locationlist)):
-    folium.Marker(locationlist[point], popup=links[point]).add_to(map)
+    folium.Marker(locationlist[point], popup=[links[point],prices[point]]).add_to(map)
 
 out_path = pm_args.output + 'wohn.html'
 map.save(out_path)
 
-#make plot of points
-# query for clicked point
-# convert to utm
-#calculate distances
-#interplates value of distane
+#interpolates value of distance - distance to public transport
 #plot surface (quartile - (very far, far, reasonable, close, very close))
 #colours for price
 #association with links
