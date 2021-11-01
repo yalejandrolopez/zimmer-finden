@@ -20,6 +20,7 @@ import argparse
 import datetime
 import folium
 import pyproj
+import webbrowser
 import pandas as pd
 import time as tp
 from bs4 import BeautifulSoup
@@ -229,7 +230,22 @@ if pm_args.poi is not None:
     m = cdist(df_p12[['lon', 'lat']], df_poi[['lon', 'lat']], 'euclidean')
     df_p12['dist'] = m
 
-    #interpolate distance
+# calculate optimal place index
+if pm_args.date is not None and pm_args.poi is not None:
+
+    df_p12['time_w'] = df_p12['time'] - given_time
+    df_p12['index'] = df_p12['price'] + df_p12['dist']/1000 + df_p12['time_w']
+
+elif pm_args.date is not None and pm_args.poi is None:
+
+    df_p12['time_w'] = df_p12['time'] - given_time
+    df_p12['index'] = df_p12['price'] + df_p12['time_w']
+
+else:
+
+    df_p12['index'] = df_p12['price']
+
+#interpolate index for best place
 
 ### make this popup look better ###
 map = folium.Map(location = [51.95371107628213, 7.628077552663438], zoom_start = 13)
@@ -238,6 +254,8 @@ for point in range(0, len(locationlist)):
 
 out_path = pm_args.output + 'wohn.html'
 map.save(out_path)
+
+webbrowser.open(out_path)
 
 #interpolates value of distance - distance to public transport
 #plot surface (quartile - (very far, far, reasonable, close, very close))
