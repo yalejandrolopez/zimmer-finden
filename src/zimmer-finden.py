@@ -35,7 +35,7 @@ pm_argparse = argparse.ArgumentParser()
 pm_argparse.add_argument( '--date' ,  type=str  , help = 'date of desired move in DD.MM.YEAR format' )
 pm_argparse.add_argument( '--price',  type=int ,  help = 'maximum price')
 pm_argparse.add_argument( '--output', type=str,   help = 'path to output html directory')
-pm_argparse.add_argument( '--poi',    type=str,   help = 'Address of Point of Interest in the format : Street, number. Use brackets! ')
+pm_argparse.add_argument( '--poi',    type=str,   help = 'Address of Point of Interest in the format : Street, number. Use quote! ')
 
 # read argument and parameters #
 pm_args = pm_argparse.parse_args()
