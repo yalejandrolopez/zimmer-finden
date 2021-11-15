@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_bed2ddf1f25e450a8d6855cdedd1f062 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+    
+                <style>
+                    .leaflet-image-layer {
+                        /* old android/safari*/
+                        image-rendering: -webkit-optimize-contrast;
+                        image-rendering: crisp-edges; /* safari */
+                        image-rendering: pixelated; /* chrome */
+                        image-rendering: -moz-crisp-edges; /* firefox */
+                        image-rendering: -o-crisp-edges; /* opera */
+                        -ms-interpolation-mode: nearest-neighbor; /* ie */
+                    }
+                </style>
+            
+</head>
+<body>    
+    
+            <div class="folium-map" id="map_bed2ddf1f25e450a8d6855cdedd1f062" ></div>
+        
+    
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WOHN - Find your home in Münster</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
+  <script>
+  $( function() {
+    $( "#maplegend" ).draggable({
+                    start: function (event, ui) {
+                        $(this).css({
+                            right: "auto",
+                            top: "auto",
+                            bottom: "auto"
+                        });
+                    }
+                });
+});
+
+  </script>
+</head>
+<body>
+
+ 
+<div id='maplegend' class='maplegend' 
+    style='position: absolute; z-index:9999; border:2px solid grey; background-color:rgba(255, 255, 255, 0.8);
+     border-radius:6px; padding: 10px; font-size:14px; right: 20px; bottom: 20px;'>
+     
+<div class='legend-title'>Index of Suitability</div>
+<div class='legend-scale'>
+  <ul class='legend-labels'>
+    <li><span style='background:darkred;opacity:0.7;'></span>Very Bad</li>
+    <li><span style='background:red;opacity:0.7;'></span>Bad</li>
+    <li><span style='background:seashell;opacity:0.7;'></span>Medium</li>
+    <li><span style='background:lightgreen;opacity:0.7;'></span>Good</li>
+    <li><span style='background:forestgreen;opacity:0.7;'></span>Very Good</li>
+  </ul>
+</div>
+</div>
+ 
+</body>
+</html>
+
+<style type='text/css'>
+  .maplegend .legend-title {
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 90%;
+    }
+  .maplegend .legend-scale ul {
+    margin: 0;
+    margin-bottom: 5px;
+    padding: 0;
+    float: left;
+    list-style: none;
+    }
+  .maplegend .legend-scale ul li {
+    font-size: 80%;
+    list-style: none;
+    margin-left: 0;
+    line-height: 18px;
+    margin-bottom: 2px;
+    }
+  .maplegend ul.legend-labels li span {
+    display: block;
+    float: left;
+    height: 16px;
+    width: 30px;
+    margin-right: 5px;
+    margin-left: 0;
+    border: 1px solid #999;
+    }
+  .maplegend .legend-source {
+    font-size: 80%;
+    color: #777;
+    clear: both;
+    }
+  .maplegend a {
+    color: #777;
+    }
+</style>
+</body>
+<script>    
+    
+            var map_bed2ddf1f25e450a8d6855cdedd1f062 = L.map(
+                "map_bed2ddf1f25e450a8d6855cdedd1f062",
+                {
+                    center: [51.95371107628213, 7.628077552663438],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 13,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_b629768530164e1792527b4c6c419505 = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_bed2ddf1f25e450a8d6855cdedd1f062);
+        
+    
+            var marker_38196ad8ac98416390d17a62cea48219 = L.marker(
+                [51.9833357, 7.6145697],
+                {}
+            ).addTo(map_bed2ddf1f25e450a8d6855cdedd1f062);
+        
+    
+            var icon_3e7f965a5139423a94ba5626f89f66dc = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_38196ad8ac98416390d17a62cea48219.setIcon(icon_3e7f965a5139423a94ba5626f89f66dc);
+        
+    
+        var popup_b55f44f2453b40c3b8d8b2f77af952af = L.popup({"maxWidth": 3000});
+
+        
+            var html_c62e7fbd2440415dafda37922a3462df = $(`<div id="html_c62e7fbd2440415dafda37922a3462df" style="width: 100.0%; height: 100.0%;">https://www.wg-gesucht.de/wg-zimmer-in-Munster-Uppenberg.9022058.html<br>Price : €257</div>`)[0];
+            popup_b55f44f2453b40c3b8d8b2f77af952af.setContent(html_c62e7fbd2440415dafda37922a3462df);
+        
+
+        marker_38196ad8ac98416390d17a62cea48219.bindPopup(popup_b55f44f2453b40c3b8d8b2f77af952af)
+        ;
+
+        
+    
+    
+            var marker_01dafa993e9e4878b421d819238d4983 = L.marker(
+                [52.0006646, 7.5917631],
+                {}
+            ).addTo(map_bed2ddf1f25e450a8d6855cdedd1f062);
+        
+    
+            var icon_083eaf9f62724abd9e68e0625be0cf6d = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_01dafa993e9e4878b421d819238d4983.setIcon(icon_083eaf9f62724abd9e68e0625be0cf6d);
+        
+    
+        var popup_95ed715f831f41bda1e99ca2b6b15ede = L.popup({"maxWidth": 3000});
+
+        
+            var html_998fe1224324419f868184f9217f69bc = $(`<div id="html_998fe1224324419f868184f9217f69bc" style="width: 100.0%; height: 100.0%;">https://www.wg-gesucht.de/wg-zimmer-in-Munster-Kinderhaus.9026581.html<br>Price : €395</div>`)[0];
+            popup_95ed715f831f41bda1e99ca2b6b15ede.setContent(html_998fe1224324419f868184f9217f69bc);
+        
+
+        marker_01dafa993e9e4878b421d819238d4983.bindPopup(popup_95ed715f831f41bda1e99ca2b6b15ede)
+        ;
+
+        
+    
+    
+            var marker_9b023776251a48fb9b2afc74bb3d55af = L.marker(
+                [51.995684, 7.6444046],
+                {}
+            ).addTo(map_bed2ddf1f25e450a8d6855cdedd1f062);
+        
+    
+            var icon_30c80cd6d1bc4a808c96790c2f238558 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_9b023776251a48fb9b2afc74bb3d55af.setIcon(icon_30c80cd6d1bc4a808c96790c2f238558);
+        
+    
+        var popup_295bf12857bf406cad78c0cbe3f2a422 = L.popup({"maxWidth": 3000});
+
+        
+            var html_de13ed9c86a54e1883b952f76891c6c2 = $(`<div id="html_de13ed9c86a54e1883b952f76891c6c2" style="width: 100.0%; height: 100.0%;">https://www.wg-gesucht.de/wg-zimmer-in-Munster-Coerde.9026561.html<br>Price : €300</div>`)[0];
+            popup_295bf12857bf406cad78c0cbe3f2a422.setContent(html_de13ed9c86a54e1883b952f76891c6c2);
+        
+
+        marker_9b023776251a48fb9b2afc74bb3d55af.bindPopup(popup_295bf12857bf406cad78c0cbe3f2a422)
+        ;
+
+        
+    
+    
+            var marker_3ebd7b57bf2f45878f5cb83a8d964d03 = L.marker(
+                [51.9533211, 7.640413633916335],
+                {}
+            ).addTo(map_bed2ddf1f25e450a8d6855cdedd1f062);
+        
+    
+            var icon_8122c8afbffa417f86b1b04ee94a41f2 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_3ebd7b57bf2f45878f5cb83a8d964d03.setIcon(icon_8122c8afbffa417f86b1b04ee94a41f2);
+        
+    
+        var popup_2f9f5da98c694421b8e7ac046721b40d = L.popup({"maxWidth": 3000});
+
+        
+            var html_27c053fd35704c29bb4569cdc6f01fe3 = $(`<div id="html_27c053fd35704c29bb4569cdc6f01fe3" style="width: 100.0%; height: 100.0%;">https://www.wg-gesucht.de/wg-zimmer-in-Munster-Hafen.6495373.html<br>Price : €275</div>`)[0];
+            popup_2f9f5da98c694421b8e7ac046721b40d.setContent(html_27c053fd35704c29bb4569cdc6f01fe3);
+        
+
+        marker_3ebd7b57bf2f45878f5cb83a8d964d03.bindPopup(popup_2f9f5da98c694421b8e7ac046721b40d)
+        ;
+
+        
+    
+    
+            var marker_b2e2ac3baaa64de39b25da66702a279f = L.marker(
+                [51.92826335, 7.624716039164567],
+                {}
+            ).addTo(map_bed2ddf1f25e450a8d6855cdedd1f062);
+        
+    
+            var icon_24024bbb955f47e9b9042b05bf4aeecb = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_b2e2ac3baaa64de39b25da66702a279f.setIcon(icon_24024bbb955f47e9b9042b05bf4aeecb);
+        
+    
+        var popup_cb5fcbe392884b93adae4431a176f24b = L.popup({"maxWidth": 3000});
+
+        
+            var html_47e8a5c573be4b2387dac5f5e0147ff1 = $(`<div id="html_47e8a5c573be4b2387dac5f5e0147ff1" style="width: 100.0%; height: 100.0%;">https://www.wg-gesucht.de/wg-zimmer-in-Munster-Berg-Fidel.8826773.html<br>Price : €330</div>`)[0];
+            popup_cb5fcbe392884b93adae4431a176f24b.setContent(html_47e8a5c573be4b2387dac5f5e0147ff1);
+        
+
+        marker_b2e2ac3baaa64de39b25da66702a279f.bindPopup(popup_cb5fcbe392884b93adae4431a176f24b)
+        ;
+
+        
+    
+    
+            var marker_5194d70480b745f4bac81771ff4c1a38 = L.marker(
+                [51.9733009, 7.596044675560025],
+                {}
+            ).addTo(map_bed2ddf1f25e450a8d6855cdedd1f062);
+        
+    
+            var icon_ffaf799c36a44995b6394600e66a7e03 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_5194d70480b745f4bac81771ff4c1a38.setIcon(icon_ffaf799c36a44995b6394600e66a7e03);
+        
+    
+        var popup_e2d17bc34881495288a9ac84cd3e364a = L.popup({"maxWidth": 3000});
+
+        
+            var html_d8fb1351f9a847989eee38aa760dcd2a = $(`<div id="html_d8fb1351f9a847989eee38aa760dcd2a" style="width: 100.0%; height: 100.0%;">https://www.wg-gesucht.de/wg-zimmer-in-Munster-Sentrup.9026410.html<br>Price : €280</div>`)[0];
+            popup_e2d17bc34881495288a9ac84cd3e364a.setContent(html_d8fb1351f9a847989eee38aa760dcd2a);
+        
+
+        marker_5194d70480b745f4bac81771ff4c1a38.bindPopup(popup_e2d17bc34881495288a9ac84cd3e364a)
+        ;
+
+        
+    
+    
+            var marker_2e94054acd4942479d9fea3d8f09d6be = L.marker(
+                [51.96269115, 7.641723672223854],
+                {}
+            ).addTo(map_bed2ddf1f25e450a8d6855cdedd1f062);
+        
+    
+            var icon_ab389c4b23dd42b9ad294fe1f25e62d0 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_2e94054acd4942479d9fea3d8f09d6be.setIcon(icon_ab389c4b23dd42b9ad294fe1f25e62d0);
+        
+    
+        var popup_33ed6f3cae2b401bb1dfaa272809c8c4 = L.popup({"maxWidth": 3000});
+
+        
+            var html_1120bdfb063042a9a52ed45d969594ba = $(`<div id="html_1120bdfb063042a9a52ed45d969594ba" style="width: 100.0%; height: 100.0%;">https://www.wg-gesucht.de/wg-zimmer-in-Munster-Erphoviertel.9026339.html<br>Price : €325</div>`)[0];
+            popup_33ed6f3cae2b401bb1dfaa272809c8c4.setContent(html_1120bdfb063042a9a52ed45d969594ba);
+        
+
+        marker_2e94054acd4942479d9fea3d8f09d6be.bindPopup(popup_33ed6f3cae2b401bb1dfaa272809c8c4)
+        ;
+
+        
+    
+    
+            var marker_3238c8c7238d4f88ade00a3f8fd5358a = L.marker(
+                [51.97527375, 7.590555113784262],
+                {}
+            ).addTo(map_bed2ddf1f25e450a8d6855cdedd1f062);
+        
+    
+            var icon_fc1b58f9d69e4d7cb143111db5bc033c = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_3238c8c7238d4f88ade00a3f8fd5358a.setIcon(icon_fc1b58f9d69e4d7cb143111db5bc033c);
+        
+    
+        var popup_5e8e680688224a528dc25961a38ad4a1 = L.popup({"maxWidth": 3000});
+
+        
+            var html_29589f4c108e44b7ba1a185f0fe9b740 = $(`<div id="html_29589f4c108e44b7ba1a185f0fe9b740" style="width: 100.0%; height: 100.0%;">https://www.wg-gesucht.de/wg-zimmer-in-Munster-Gievenbeck.8468019.html<br>Price : €323</div>`)[0];
+            popup_5e8e680688224a528dc25961a38ad4a1.setContent(html_29589f4c108e44b7ba1a185f0fe9b740);
+        
+
+        marker_3238c8c7238d4f88ade00a3f8fd5358a.bindPopup(popup_5e8e680688224a528dc25961a38ad4a1)
+        ;
+
+        
+    
+    
+            var marker_d756d85c1bc242c8b677c359c1e25e45 = L.marker(
+                [51.9743896, 7.592224116595003],
+                {}
+            ).addTo(map_bed2ddf1f25e450a8d6855cdedd1f062);
+        
+    
+            var icon_ae7ac0ca40904b1b92d7577486e73473 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_d756d85c1bc242c8b677c359c1e25e45.setIcon(icon_ae7ac0ca40904b1b92d7577486e73473);
+        
+    
+        var popup_7482ce3d2f33452b840b61aee8ea3e54 = L.popup({"maxWidth": 3000});
+
+        
+            var html_9f433589b06b4401869253b355e2f76f = $(`<div id="html_9f433589b06b4401869253b355e2f76f" style="width: 100.0%; height: 100.0%;">https://www.wg-gesucht.de/wg-zimmer-in-Munster-Sentrup.9026191.html<br>Price : €250</div>`)[0];
+            popup_7482ce3d2f33452b840b61aee8ea3e54.setContent(html_9f433589b06b4401869253b355e2f76f);
+        
+
+        marker_d756d85c1bc242c8b677c359c1e25e45.bindPopup(popup_7482ce3d2f33452b840b61aee8ea3e54)
+        ;
+
+        
+    
+    
+            var marker_4b9a14426e764b64971511c37dfb736b = L.marker(
+                [51.907482599999994, 7.64906144455886],
+                {}
+            ).addTo(map_bed2ddf1f25e450a8d6855cdedd1f062);
+        
+    
+            var icon_1785a2e2d91d4609bd3ccd4c834e0b69 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_4b9a14426e764b64971511c37dfb736b.setIcon(icon_1785a2e2d91d4609bd3ccd4c834e0b69);
+        
+    
+        var popup_88ea2b25711c47c48b0a114529d8c255 = L.popup({"maxWidth": 3000});
+
+        
+            var html_6d497263ffc94b35bff933d70b0d7458 = $(`<div id="html_6d497263ffc94b35bff933d70b0d7458" style="width: 100.0%; height: 100.0%;">https://www.wg-gesucht.de/wohnungen-in-Munster-Hiltrup.9020853.html<br>Price : €927</div>`)[0];
+            popup_88ea2b25711c47c48b0a114529d8c255.setContent(html_6d497263ffc94b35bff933d70b0d7458);
+        
+
+        marker_4b9a14426e764b64971511c37dfb736b.bindPopup(popup_88ea2b25711c47c48b0a114529d8c255)
+        ;
+
+        
+    
+    
+            var marker_5222497f01934c69809c53cd294760ac = L.marker(
+                [51.9489272, 7.6216927],
+                {}
+            ).addTo(map_bed2ddf1f25e450a8d6855cdedd1f062);
+        
+    
+            var icon_093cca9e9e7b481b91f004b9b3f2f4cc = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_5222497f01934c69809c53cd294760ac.setIcon(icon_093cca9e9e7b481b91f004b9b3f2f4cc);
+        
+    
+        var popup_694c83c2a829451987c17cbed2befa88 = L.popup({"maxWidth": 3000});
+
+        
+            var html_39b921a461bc4f5db1adf5b207db35f3 = $(`<div id="html_39b921a461bc4f5db1adf5b207db35f3" style="width: 100.0%; height: 100.0%;">https://www.wg-gesucht.de/wg-zimmer-in-Munster-Geist.8982168.html<br>Price : €405</div>`)[0];
+            popup_694c83c2a829451987c17cbed2befa88.setContent(html_39b921a461bc4f5db1adf5b207db35f3);
+        
+
+        marker_5222497f01934c69809c53cd294760ac.bindPopup(popup_694c83c2a829451987c17cbed2befa88)
+        ;
+
+        
+    
+    
+            var marker_9d858313806a4ae79e98af07698fef38 = L.marker(
+                [51.9556471, 7.5980086],
+                {}
+            ).addTo(map_bed2ddf1f25e450a8d6855cdedd1f062);
+        
+    
+            var icon_793965fddd61480aa0cb8e14413da87c = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_9d858313806a4ae79e98af07698fef38.setIcon(icon_793965fddd61480aa0cb8e14413da87c);
+        
+    
+        var popup_c094e31f66be43fcb044cc610f34024f = L.popup({"maxWidth": 3000});
+
+        
+            var html_77576011c2a244d5b3990c324ffee7fd = $(`<div id="html_77576011c2a244d5b3990c324ffee7fd" style="width: 100.0%; height: 100.0%;">https://www.wg-gesucht.de/wg-zimmer-in-Munster-Sentrup.8457509.html<br>Price : €428</div>`)[0];
+            popup_c094e31f66be43fcb044cc610f34024f.setContent(html_77576011c2a244d5b3990c324ffee7fd);
+        
+
+        marker_9d858313806a4ae79e98af07698fef38.bindPopup(popup_c094e31f66be43fcb044cc610f34024f)
+        ;
+
+        
+    
+    
+            var marker_67c35bfd17c54dc6af9170019390a3fc = L.marker(
+                [51.9604667, 7.6745086],
+                {}
+            ).addTo(map_bed2ddf1f25e450a8d6855cdedd1f062);
+        
+    
+            var icon_9a554ba42b1c42b188cbb360183631e6 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_67c35bfd17c54dc6af9170019390a3fc.setIcon(icon_9a554ba42b1c42b188cbb360183631e6);
+        
+    
+        var popup_24b76d58ac6a4bb3b508f332f7ca5d09 = L.popup({"maxWidth": 3000});
+
+        
+            var html_c6f23da88e2744a28737cb1550372a0f = $(`<div id="html_c6f23da88e2744a28737cb1550372a0f" style="width: 100.0%; height: 100.0%;">https://www.wg-gesucht.de/wg-zimmer-in-Munster-Mauritz.8294361.html<br>Price : €449</div>`)[0];
+            popup_24b76d58ac6a4bb3b508f332f7ca5d09.setContent(html_c6f23da88e2744a28737cb1550372a0f);
+        
+
+        marker_67c35bfd17c54dc6af9170019390a3fc.bindPopup(popup_24b76d58ac6a4bb3b508f332f7ca5d09)
+        ;
+
+        
+    
+    
+            var marker_305db0f4e37b40d895e134cf62cb5d9e = L.marker(
+                [51.9753641, 7.5916279],
+                {}
+            ).addTo(map_bed2ddf1f25e450a8d6855cdedd1f062);
+        
+    
+            var icon_84ee8a19b15e459caedbe07ea975b810 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_305db0f4e37b40d895e134cf62cb5d9e.setIcon(icon_84ee8a19b15e459caedbe07ea975b810);
+        
+    
+        var popup_a8e05b97ceff4269bd94eb3cc7bce1de = L.popup({"maxWidth": 3000});
+
+        
+            var html_084abf13242c4737a4a29b1e85ed82cb = $(`<div id="html_084abf13242c4737a4a29b1e85ed82cb" style="width: 100.0%; height: 100.0%;">https://www.wg-gesucht.de/wg-zimmer-in-Munster-Gievenbeck.9024167.html<br>Price : €376</div>`)[0];
+            popup_a8e05b97ceff4269bd94eb3cc7bce1de.setContent(html_084abf13242c4737a4a29b1e85ed82cb);
+        
+
+        marker_305db0f4e37b40d895e134cf62cb5d9e.bindPopup(popup_a8e05b97ceff4269bd94eb3cc7bce1de)
+        ;
+
+        
+    
+    
+            var marker_c5267ea639374b8d8259070778c22997 = L.marker(
+                [51.9742891, 7.574250898698034],
+                {}
+            ).addTo(map_bed2ddf1f25e450a8d6855cdedd1f062);
+        
+    
+            var icon_b8c8d834d19f43b788653e820c729503 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_c5267ea639374b8d8259070778c22997.setIcon(icon_b8c8d834d19f43b788653e820c729503);
+        
+    
+        var popup_50eb8f95dd954b3288a008d197f9d56a = L.popup({"maxWidth": 3000});
+
+        
+            var html_cdf7f4c0feee47059cce9f782a7da295 = $(`<div id="html_cdf7f4c0feee47059cce9f782a7da295" style="width: 100.0%; height: 100.0%;">https://www.wg-gesucht.de/wg-zimmer-in-Munster-Gievenbeck.9025247.html<br>Price : €300</div>`)[0];
+            popup_50eb8f95dd954b3288a008d197f9d56a.setContent(html_cdf7f4c0feee47059cce9f782a7da295);
+        
+
+        marker_c5267ea639374b8d8259070778c22997.bindPopup(popup_50eb8f95dd954b3288a008d197f9d56a)
+        ;
+
+        
+    
+    
+            var marker_24ad1edaa33b4fa7a17e061867ff8110 = L.marker(
+                [51.9723414, 7.5759638],
+                {}
+            ).addTo(map_bed2ddf1f25e450a8d6855cdedd1f062);
+        
+    
+            var icon_33f7bd0529aa4e74bafc2f90b94aa950 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_24ad1edaa33b4fa7a17e061867ff8110.setIcon(icon_33f7bd0529aa4e74bafc2f90b94aa950);
+        
+    
+        var popup_60a646ce3d0e448dad05793e5765d504 = L.popup({"maxWidth": 3000});
+
+        
+            var html_22114d2123db4642ad2cce7c6a269e6f = $(`<div id="html_22114d2123db4642ad2cce7c6a269e6f" style="width: 100.0%; height: 100.0%;">https://www.wg-gesucht.de/wohnungen-in-Munster-Gievenbeck.4274770.html<br>Price : €960</div>`)[0];
+            popup_60a646ce3d0e448dad05793e5765d504.setContent(html_22114d2123db4642ad2cce7c6a269e6f);
+        
+
+        marker_24ad1edaa33b4fa7a17e061867ff8110.bindPopup(popup_60a646ce3d0e448dad05793e5765d504)
+        ;
+
+        
+    
+    
+            var marker_e9d924205a5b4ecd86bcf1edfa518c0f = L.marker(
+                [51.9528941, 7.6381486],
+                {}
+            ).addTo(map_bed2ddf1f25e450a8d6855cdedd1f062);
+        
+    
+            var icon_10f8d956f6d14cfc8d1871a9d3c1b9ff = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_e9d924205a5b4ecd86bcf1edfa518c0f.setIcon(icon_10f8d956f6d14cfc8d1871a9d3c1b9ff);
+        
+    
+        var popup_bcee1d1023b543c9812e4aa696f39e50 = L.popup({"maxWidth": 3000});
+
+        
+            var html_92172d49c62b4e14a74e7aff7ec9cd71 = $(`<div id="html_92172d49c62b4e14a74e7aff7ec9cd71" style="width: 100.0%; height: 100.0%;">https://www.wg-gesucht.de/wg-zimmer-in-Munster-Hafen.9005068.html<br>Price : €326</div>`)[0];
+            popup_bcee1d1023b543c9812e4aa696f39e50.setContent(html_92172d49c62b4e14a74e7aff7ec9cd71);
+        
+
+        marker_e9d924205a5b4ecd86bcf1edfa518c0f.bindPopup(popup_bcee1d1023b543c9812e4aa696f39e50)
+        ;
+
+        
+    
+    
+            var marker_82773f672f5848c18d3cbfc5d70cee13 = L.marker(
+                [51.89461405, 7.651408088535851],
+                {}
+            ).addTo(map_bed2ddf1f25e450a8d6855cdedd1f062);
+        
+    
+            var icon_ed4cd7bcebe3460983a0e8c324706f13 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_82773f672f5848c18d3cbfc5d70cee13.setIcon(icon_ed4cd7bcebe3460983a0e8c324706f13);
+        
+    
+        var popup_093259059973482dba8dda2353fedc8e = L.popup({"maxWidth": 3000});
+
+        
+            var html_d20152e0ba574b47b96c9c152391d8d6 = $(`<div id="html_d20152e0ba574b47b96c9c152391d8d6" style="width: 100.0%; height: 100.0%;">https://www.wg-gesucht.de/wohnungen-in-Munster-Hiltrup.9024535.html<br>Price : €650</div>`)[0];
+            popup_093259059973482dba8dda2353fedc8e.setContent(html_d20152e0ba574b47b96c9c152391d8d6);
+        
+
+        marker_82773f672f5848c18d3cbfc5d70cee13.bindPopup(popup_093259059973482dba8dda2353fedc8e)
+        ;
+
+        
+    
+    
+            var image_overlay_88226bb51e6f4de983f52f2213657c97 = L.imageOverlay(
+                "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACgCAYAAADuIpVSAAADoUlEQVR42u3dQZLUMAwFUJ+F4rbZzJqLsgwsKTbAEMf60lPV33dab9RupzNe91r3sah9dbKvP7OgAqsPLNUeF1hgNYGlRuACC6wGsNQYXGCBFQ5LjcIFFljBsNQ4XGCBBZbKwbWgAgssBRZYYEEFF1gKLA0ECyywUmCp0bjAAgssBZbGgQUWWGApsBRYQ1F9fP/2zwELrMcwtUQGVi1MbYCBVRtVLDCw6oOKxAVWDqooXGBloYoBBlYeqAhcNkizYZXFBVY2KrBCYVVHVRYXWPmoSuICC6w0VNGw0lCVwgUWWGC9iCsVVRlcYIGViCoSVjqq47jAAgusF3E91dgvH1//Kq1gtfpXkcVg/S2o3cDAKgTrFKpdwMAqgus0qqdxdUU1BtaTqJ7EBVYwrB2onsLVFVXckSeVUIEFVllcXVHFHStXDRVYYJXE1RVV3NG9YIF1FNabqD4LqzOqM7BewDUe1mFUYIHVDNZ/4AKrPqqzsD6JqwOs7qgiYVXEVQJWIVTnYTWZWqZVRVjhuEwrsHpOq4Ko6sAKxXV8WhVFVQtWGC6okmB9AteJ+4dHURUH1QbWU4+ERdxoDkFVE9ZBXKUf8QpCVRfWC7h2A52MqjasjTvzu6ffZFAZsDbg2v3RClUKrAd/0rxzzQbUQFg7b3YDlQyr4GkXQHWB1e044KagMmF1wNUcFFgwgRWJayAmsGACqzwuiJrBOoULGrBAAqsOLijqwrp+SwQuGM7DujbkKC4QzsC6DmU7sIcn82sTOhnWVTCPIHsY0atTORXWFZidb07yay8B6xqUih/9LWFdw2BdRdeT3ZCBVXQZAFYDWFPXkGANRZUMDCy4wJqMKg0YWICB9WQjJu3LgQVWG1zjYE2/qwCWROMCCy6wJAfYsl6CC6ym+1EdcS3bBnCBBVUMLrDgAuvXRTtctXHFwzLBauJand4QYOrgAgsusC6oYnCBJVtwLahkBy6wZAuu1eVioQBr20WCUQfX6nZxYNTAtTr+tYBxvher69ddMM72ZXXcnINrOKwbrLa4VkdQYJ3v2eqKCq5BsG6wxuBanVGBda6PqysosBrDusEai2t1RgUWWGA1w7U6owKrEawbLLiehnWDBdbTsG6w4AJLImDdYMEFlkTAusESsCQC1g2WTISl4edwLdNKwAIrBhdYAhZUzWGZVvInH2AJWFCBBRZYbjrL82kFS0PBAgssv22XobA0sgkszw5Ke1iaCBZUg/ID6CH5zwJm198AAAAASUVORK5CYII=",
+                [[51.83151545661322, 7.453784865191184], [52.065289109492184, 7.788799076403559]],
+                {"opacity": 0.5}
+            ).addTo(map_bed2ddf1f25e450a8d6855cdedd1f062);
+        
+</script>
