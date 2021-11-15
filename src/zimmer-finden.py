@@ -43,6 +43,7 @@ pm_argparse.add_argument( '--date' ,  type=str  , help = 'date of desired move i
 pm_argparse.add_argument( '--price',  type=int ,  help = 'maximum price')
 pm_argparse.add_argument( '--output', type=str,   help = 'path to output html directory')
 pm_argparse.add_argument( '--poi',    type=str,   help = 'Address of Point of Interest in the format : Street, number. Use quote! ')
+pm_argparse.add_argument( '--write',  type=int,   default = 1, help = 'Write or not cube (tif and csv). 0 to false and 1 to true (default)')
 
 # read argument and parameters #
 pm_args = pm_argparse.parse_args()
@@ -277,6 +278,13 @@ else:
     df_p12['index'] = df_p12['price'].astype(int)
 
 df_p12['index'] =  (( df_p12['index'] - df_p12['index'].min() ) / ( df_p12['index'].max() - df_p12['index'].min() ))
+
+#write csv with locations and data
+if pm_args.write != 0:
+
+    filename = pm_args.output + str(int(tp.time())) + '-wohn.csv'
+    df_p12.to_csv(filename)
+
 #interpolate index for best place
 
 # sampling grid
@@ -309,7 +317,7 @@ grid1 = grid1.reshape((ny, nx))
 nrows,ncols = np.shape(grid1)
 geotransform=(xmin,nx,0,ymax,0,-ny)
 filename = pm_args.output + str(int(tp.time())) + '-wohn.tif'
-output_raster = gdal.GetDriverByName('GTiff').Create(filename,ncols, nrows, 1, gdal.GDT_Float32)
+output_raster = gdal.GetDriverByName('GTiff').Create(filename, ncols, nrows, 1, gdal.GDT_Float32)
 output_raster.SetGeoTransform(geotransform)  
 srs = osr.SpatialReference()                 
 srs.ImportFromEPSG(32632)
@@ -447,7 +455,5 @@ out_path = pm_args.output + 'wohn.html'
 map.save(out_path)
 webbrowser.open(out_path)
 
-#plot surface (quartile - (very far, far, reasonable, close, very close))
-#colours for price
 #association with links
 #men or woman desired for room
