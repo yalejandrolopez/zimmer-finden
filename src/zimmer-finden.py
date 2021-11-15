@@ -43,7 +43,7 @@ pm_argparse.add_argument( '--date' ,  type=str  , help = 'date of desired move i
 pm_argparse.add_argument( '--price',  type=int ,  help = 'maximum price')
 pm_argparse.add_argument( '--output', type=str,   help = 'path to output html directory')
 pm_argparse.add_argument( '--poi',    type=str,   help = 'Address of Point of Interest in the format : Street, number. Use quote! ')
-pm_argparse.add_argument( '--write',  type=int,   default = 1, help = 'Write or not cube (tif and csv). 0 to false and 1 to true (default)')
+pm_argparse.add_argument( '--write',  type=int,   default = 1, help = 'Write or not csv. 0 to false and 1 to true (default)')
 
 # read argument and parameters #
 pm_args = pm_argparse.parse_args()
